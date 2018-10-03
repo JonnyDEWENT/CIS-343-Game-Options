@@ -4,8 +4,9 @@
 #include "SFML/Graphics.hpp"
 
 
-gameOptions::gameOptions(){
-
+gameOptions::gameOptions(sf::Window window,sf::Music music){
+    // gameWindow = window;
+    // gameMusic = music;
 }
 
 void gameOptions::pause(){

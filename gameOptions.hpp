@@ -9,7 +9,7 @@
 class gameOptions{
 	public:
 
-		gameOptions();
+		gameOptions(sf::Window, sf::Music);
 
 		void pause();
 
