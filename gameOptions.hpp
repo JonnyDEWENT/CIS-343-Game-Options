@@ -6,14 +6,28 @@
 #include "SFML/Graphics.hpp"
 
 
-class Option{
+class gameOptions{
 	public:
+
+		gameOptions();
+
+		void pause();
+
+		void displayCredits();
+
+		void reset();
+
+		void highScore();
+
+		void exitToMenu();
+
+		void changeTextColor();
 
 
 	private:
 
 
-
-}
+};
 
 #endif
+

@@ -3,11 +3,33 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 
-Option::Option(){
 
-
-
-
+gameOptions::gameOptions(){
 
 }
+
+void gameOptions::pause(){
+
+}
+
+void gameOptions::displayCredits(){
+
+}
+
+void gameOptions::reset(){
+
+}
+
+void gameOptions::highScore(){
+
+}
+
+void gameOptions::exitToMenu(){
+
+}
+
+void gameOptions::changeTextColor(){
+
+}
+
 
