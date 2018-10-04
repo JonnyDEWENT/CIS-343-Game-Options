@@ -4,6 +4,8 @@
 #include "Game.hpp"
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
+#include <iostream>
+#include <GLFW/glfw3.h>
 
 
 class gameOptions{
@@ -15,7 +17,13 @@ class gameOptions{
 
 		void stopMusic(sf::Music&);
 
-		void pause();
+		void startMusic(sf::Music&);
+
+		void acceptUserInput(sf::RenderWindow&, sf::Music&);
+
+		void displayMenu(sf::RenderWindow&, sf::Music&);
+		
+		void displayMenu(sf::RenderWindow&);
 
 		void displayCredits();
 
@@ -27,9 +35,11 @@ class gameOptions{
 
 		void changeTextColor();
 
+		void fullScreen(sf::RenderWindow&);
 
 	private:
 
+	sf::Font font;
 	//sf::Music music;
 
 
