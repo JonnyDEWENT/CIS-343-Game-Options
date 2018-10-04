@@ -9,7 +9,11 @@
 class gameOptions{
 	public:
 
-		gameOptions(sf::Window, sf::Music);
+		gameOptions();
+
+		gameOptions(sf::RenderWindow&, sf::Music&);
+
+		void stopMusic(sf::Music&);
 
 		void pause();
 
@@ -25,6 +29,8 @@ class gameOptions{
 
 
 	private:
+
+	//sf::Music music;
 
 
 };
