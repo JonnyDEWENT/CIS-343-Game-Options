@@ -3,7 +3,8 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include <iostream>
-#include <GLFW/glfw3.h>
+
+
 
 
 
@@ -135,10 +136,8 @@ void gameOptions::changeTextColor(){
 
 void gameOptions::fullScreen(sf::RenderWindow& window) 
 {
-
     window.create(sf::VideoMode(1300, 1400), "Not on my block.");
     displayMenu(window);
-
 }
 
 

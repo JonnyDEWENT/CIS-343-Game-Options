@@ -5,7 +5,7 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include <iostream>
-#include <GLFW/glfw3.h>
+
 
 
 class gameOptions{
