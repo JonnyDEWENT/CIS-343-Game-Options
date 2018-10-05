@@ -114,7 +114,7 @@ void gameOptions::acceptUserInput(sf::RenderWindow& window, sf::Music& music){
 }
 
 /** Added by Nate, unconfirmed if works **/
-void changeResolution(sf::RenderWindow& window, int x, int y) {
+void gameOptions::changeResolution(sf::RenderWindow& window, int x, int y) {
 	window.setSize(sf::Vector2<unsigned int>(x, y));
 }
 
