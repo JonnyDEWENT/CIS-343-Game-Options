@@ -6,6 +6,9 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
+/**Added by Nate **/
+#include <vector>
+
 
 
 class gameOptions{
@@ -24,10 +27,14 @@ class gameOptions{
 		void displayMenu(sf::RenderWindow&, sf::Music&);
 		
 		void displayMenu(sf::RenderWindow&);
+		
+		/**Added by Nate, unconfirmetd if works **/
+		void changeResolution(sf::RenderWindow&, int, int);
 
 		void displayCredits();
-
-		void reset();
+		
+		/** Changed by Nate, unconfirmed **/
+		void reset(std::vector<Monster>&, Person&, boolean&);
 
 		void highScore();
 
@@ -36,6 +43,12 @@ class gameOptions{
 		void changeTextColor();
 
 		void fullScreen(sf::RenderWindow&);
+	
+		/** Following methods where added by Nate, unconfirmed **/
+		void setPlayerHealth(Person&, int);
+		void resetPlayer(Person&);
+		void endGame(boolean&);
+		
 
 	private:
 
