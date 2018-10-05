@@ -164,14 +164,6 @@ void gameOptions::resetPlayer(Person& player){
 }
 
 /**Added by Nate, unconfirmed if works **/
-void gameOptions::resetGame(std::vector<Monster>& monsters, Person& player, boolean& done){
-	resetPlayer(player); //player.initialize() would work too
-	monsters.clear(); //Clearing monster vector
-	monsters.push_back(Monster()); //Adding a single monster like game says.
-	done = false; //Maybe this isnt neccecary
-}
-
-/**Added by Nate, unconfirmed if works **/
 void gameOptions::endGame(boolean& done){
 	done = true; //Should break the loop, see Game::run function
 }
