@@ -5,6 +5,7 @@
 #include "Monster.hpp"
 #include "SFML/Graphics.hpp"
 #include <vector>
+#include "gameOptions.hpp"
 
 class Game {
 	public:
@@ -21,6 +22,7 @@ class Game {
 		Person player;
 		bool done;
 		int score;
+		gameOptions optionsMenu;
 		sf::Text scoreLabel;
 		sf::Text playerHealth;	
         	sf::Font font;
