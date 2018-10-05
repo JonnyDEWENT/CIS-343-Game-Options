@@ -4,6 +4,10 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 
+/**Added by Nate **/
+#include "Person.hpp"
+#include <vector>
+
 
 
 
@@ -109,8 +113,9 @@ void gameOptions::acceptUserInput(sf::RenderWindow& window, sf::Music& music){
 }
 }
 
-void changeResolution() {
-
+/** Added by Nate, unconfirmed if works **/
+void changeResolution(sf::RenderWindow& window, int x, int y) {
+	window.setSize(sf::Vector2<unsigned int>(x, y));
 }
 
 
@@ -118,26 +123,56 @@ void gameOptions::displayCredits(){
 
 }
 
-void gameOptions::reset(){
-
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::reset(std::vector<Monster>& monsters, Person& player, boolean& done){
+	resetPlayer(player); //player.initialize() would work too
+	monsters.clear(); //Clearing monster vector
+	monsters.push_back(Monster()); //Adding a single monster like game says.
+	done = false; //Maybe this isnt neccecary
 }
 
 void gameOptions::highScore(){
-
+	
 }
 
 void gameOptions::exitToMenu(){
-
 }
 
-void gameOptions::changeTextColor(){
-
+void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){
+	/**This one I think we would have to ask to change his render funcion - Nate **/
 }
 
 void gameOptions::fullScreen(sf::RenderWindow& window) 
 {
+	/**I think that window.setSize(sf::Vector2<unsigned int>(1300, 1400));
+	* might work here instead of .create. Thats what I used before and it
+	* seemed to work. Its worth a shot. */
     window.create(sf::VideoMode(1300, 1400), "Not on my block.");
     displayMenu(window);
 }
 
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::setPlayerHealth(Person& player, int health){
+	player.setHealth(health);
+	/** player->setHealth(health)? idk if its on stack or heap **/
+}
+
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::resetPlayer(Person& player){
+	/**I belive this will reset the player back to its original position and health **/
+	player.initialize(); //player->initialize()?
+}
+
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::resetGame(std::vector<Monster>& monsters, Person& player, boolean& done){
+	resetPlayer(player); //player.initialize() would work too
+	monsters.clear(); //Clearing monster vector
+	monsters.push_back(Monster()); //Adding a single monster like game says.
+	done = false; //Maybe this isnt neccecary
+}
+
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::endGame(boolean& done){
+	done = true; //Should break the loop, see Game::run function
+}
 
