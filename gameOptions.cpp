@@ -3,17 +3,27 @@
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
 #include <iostream>
+#include "Settings.hpp"
+
+/**Added by Nate **/
+#include "Person.hpp"
+#include <vector>
 
 
 
 
 
 
-
+/*************************************************************************
+* Default constructor
+*************************************************************************/
 gameOptions::gameOptions() {
 
 
 }
+/*************************************************************************
+* Constructor ()
+*************************************************************************/
 gameOptions::gameOptions(sf::RenderWindow& window, sf::Music& music){
 
     if(!font.loadFromFile("fonts/Notable-Regular.ttf")){
@@ -21,14 +31,23 @@ gameOptions::gameOptions(sf::RenderWindow& window, sf::Music& music){
 	}
 }
 
+/*************************************************************************
+* Pauses the music
+*************************************************************************/
 void gameOptions::stopMusic(sf::Music& music) {
     music.pause();
 }
 
+/*************************************************************************
+* Starts the music
+*************************************************************************/
 void gameOptions::startMusic(sf::Music& music) {
     music.play();
 }
 
+/*************************************************************************
+*
+*************************************************************************/
 void gameOptions::displayMenu(sf::RenderWindow& window){
     window.clear();
 
@@ -70,11 +89,18 @@ void gameOptions::displayMenu(sf::RenderWindow& window){
    
 }
 
+/*************************************************************************
+* Overloaded displayMenu to include music when calling acceptUserInput
+*************************************************************************/
 void gameOptions::displayMenu(sf::RenderWindow& window, sf::Music& music){
     displayMenu(window);
     acceptUserInput(window,music);
 }
 
+/*********************************************************************************
+* This function runs the duration of the game options screen listening for
+* user input.
+********************************************************************************/
 void gameOptions::acceptUserInput(sf::RenderWindow& window, sf::Music& music){
     while (window.isOpen())
 	{
@@ -109,8 +135,11 @@ void gameOptions::acceptUserInput(sf::RenderWindow& window, sf::Music& music){
 }
 }
 
-void changeResolution() {
-
+/** Added by Nate, unconfirmed if works **/
+void gameOptions::changeResolution(sf::RenderWindow& window, int x, int y) {
+	window.setSize(sf::Vector2<unsigned int>(x, y));
+	window.setPosition(sf::Vector2<int>(0,0));
+	
 }
 
 
@@ -118,26 +147,53 @@ void gameOptions::displayCredits(){
 
 }
 
-void gameOptions::reset(){
-
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::reset(std::vector<Monster>& monsters, Person& player, bool& done){
+	resetPlayer(player); //player.initialize() would work too
+	monsters.clear(); //Clearing monster vector
+	monsters.push_back(Monster()); //Adding a single monster like game says.
+	done = false; //Maybe this isnt neccecary
 }
 
 void gameOptions::highScore(){
-
+	
 }
 
+/*************************************************************************
+* Should effectively quit the game and return to the main screen
+*************************************************************************/
 void gameOptions::exitToMenu(){
-
 }
 
-void gameOptions::changeTextColor(){
-
+void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){
+	/**This one I think we would have to ask to change his render funcion - Nate **/
 }
 
 void gameOptions::fullScreen(sf::RenderWindow& window) 
 {
-    window.create(sf::VideoMode(1300, 1400), "Not on my block.");
+	/**I think that window.setSize(sf::Vector2<unsigned int>(1300, 1400));
+	* might work here instead of .create. Thats what I used before and it
+	* seemed to work. Its worth a shot. */
+    //window.create(sf::VideoMode(1300, 1400), "Not on my block.", 3 << 3);
+	const std::vector<sf::VideoMode>& fullscreenModes = sf::VideoMode::getFullscreenModes();
+	changeResolution(window,fullscreenModes[0].width,fullscreenModes[0].height);
     displayMenu(window);
 }
 
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::setPlayerHealth(Person& player, int health){
+	player.setHealth(health);
+	/** player->setHealth(health)? idk if its on stack or heap **/
+}
+
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::resetPlayer(Person& player){
+	/**I belive this will reset the player back to its original position and health **/
+	player.initialize(); //player->initialize()?
+}
+
+/**Added by Nate, unconfirmed if works **/
+void gameOptions::endGame(bool& done){
+	done = true; //Should break the loop, see Game::run function
+}
 
