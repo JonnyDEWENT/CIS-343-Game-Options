@@ -165,8 +165,75 @@ void gameOptions::highScore(){
 void gameOptions::exitToMenu(){
 }
 
-void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){
+
+
+/***********************************************************************************************************************
+* This funtion change the game title and game text color
+* Add by Runquan Ye
+* My idea is this, the option panel will show the text to inform user that press key to change the text and title's colors
+* 	i.e.: press "F3" function key invold changeTextColor method
+*	      then press "1" for turning the text color to red, "2" for blue
+*		"1 - red, 2 - white, 3 - blue, 4 - green, 5 - purple"
+*		"6 - brown, 7 - gray, 8 - orange, 9 - yellow, 0 - pink"
+* Request, need the game object g pass in (Maybe)
+*	or just modify the window object's title and text feature.
+*	or just modify the text and title feature and then update the window, since option is a part inside of the game
+************************************************************************************************************************/
+void gameOptions::changeTextColor(sf::Text &text, sf::Text &title, sf::Event &event){
 	/**This one I think we would have to ask to change his render funcion - Nate **/
+	switch(event.key.code){
+		std::cout << event.key.code;
+		case sf::Keyboard::Num1:
+			text.setFillColor(sf::Color::Red);
+			title.setFillColor(sf::Color::Red);
+		break;
+		
+		case sf::Keyboard::Num2:
+			text.setFillColor(sf::Color::White);
+			title.setFillColor(sf::Color::White);
+		break;
+
+		case sf::Keyboard::Num3:
+			text.setFillColor(sf::Color::Blue);
+			title.setFillColor(sf::Color::Blue);
+		break;
+
+		case sf::Keyboard::Num4:
+			text.setFillColor(sf::Color::Green);
+			title.setFillColor(sf::Color::Green);
+		break;
+
+		case sf::Keyboard::Num5:
+			text.setFillColor(sf::Color::Purple);
+			title.setFillColor(sf::Color::Purple);
+		break;
+	
+		case sf::Keyboard::Num6:
+			text.setFillColor(sf::Color::Brown);
+			title.setFillColor(sf::Color::Brown);
+		break;
+
+		case sf::Keyboard::Num7:
+			text.setFillColor(sf::Color::Gray);
+			title.setFillColor(sf::Color::Gray);
+		break;
+
+		case sf::Keyboard::Num8:
+			text.setFillColor(sf::Color::Orange);
+			title.setFillColor(sf::Color::Orange);
+		break;
+
+		case sf::Keyboard::Num9:
+			text.setFillColor(sf::Color::Yellow);
+			title.setFillColor(sf::Color::Yellow);
+		break;
+
+		case sf::Keyboard::Num0:
+			text.setFillColor(sf::Color::Pink);
+			title.setFillColor(sf::Color::Pink);
+		break;
+		
+	}
 }
 
 void gameOptions::fullScreen(sf::RenderWindow& window) 
