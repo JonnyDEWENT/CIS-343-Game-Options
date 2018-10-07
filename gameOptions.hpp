@@ -48,6 +48,7 @@ class gameOptions{
 		void setPlayerHealth(Person&, int);
 		void resetPlayer(Person&);
 		void endGame(bool&);
+	        void gameOptions::changeDifficulty(int, std::vector<Monster>&, Person&);
 		
 
 	private:
