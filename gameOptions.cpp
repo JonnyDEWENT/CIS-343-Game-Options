@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Monster.hpp"
 #include "gameOptions.hpp"
 #include "SFML/Audio.hpp"
 #include "SFML/Graphics.hpp"
@@ -60,28 +61,73 @@ void gameOptions::displayMenu(sf::RenderWindow& window){
 
     sf::Text txtChangeDisplay;
 	txtChangeDisplay.setFont(font);
-	txtChangeDisplay.setString("FullScreen On/Off V");
+	txtChangeDisplay.setString("FullScreen On");
 	txtChangeDisplay.setCharacterSize(24);
 	txtChangeDisplay.setFillColor(sf::Color::White);
 	txtChangeDisplay.setPosition(175,300);
 
+	sf::Text txtChangeDisplay2;
+	txtChangeDisplay2.setFont(font);
+	txtChangeDisplay2.setString("FullScreen Off");
+	txtChangeDisplay2.setCharacterSize(24);
+	txtChangeDisplay2.setFillColor(sf::Color::White);
+	txtChangeDisplay2.setPosition(175,350);
+
     sf::Text txtExit;
 	txtExit.setFont(font);
-	txtExit.setString("Exit - 'Backspace'");
+	txtExit.setString("Exit");
 	txtExit.setCharacterSize(24);
 	txtExit.setFillColor(sf::Color::White);
-	txtExit.setPosition(175,350);
+	txtExit.setPosition(175,400);
+	
 
 
     sf::Text txtMusic;
 	txtMusic.setFont(font);
-	txtMusic.setString("Music On/Off 'M'");
+	txtMusic.setString("Music On/Off");
 	txtMusic.setCharacterSize(24);
 	txtMusic.setFillColor(sf::Color::White);
-	txtMusic.setPosition(175,400);
+	txtMusic.setPosition(175,450);
+
+
+	
+	if (itemSelected == menuSize)
+		itemSelected = 0;
+	else if(itemSelected == -1) {
+		itemSelected = 3;
+	}
+	switch (itemSelected) {
+
+		case 0: 
+		colorLabel(window,txtChangeDisplay);
+		//txtChangeDisplay.setFillColor(sf::Color::Yellow);
+		break;
+
+
+		case 1:
+		colorLabel(window,txtChangeDisplay2);
+		//txtExit.setFillColor(sf::Color::Yellow);
+		break;
+
+
+		case 2:
+		colorLabel(window,txtExit);
+		//txtExit.setFillColor(sf::Color::Yellow);
+		break;
+
+		case 3:
+		colorLabel(window,txtMusic);
+		//txtMusic.setFillColor(sf::Color::Yellow);
+		break;
+
+		default:
+		break;
+		
+	}
 
     window.draw(txtTitle);
     window.draw(txtChangeDisplay);
+	window.draw(txtChangeDisplay2);
     window.draw(txtMusic);
     window.draw(txtExit);
 
@@ -93,6 +139,7 @@ void gameOptions::displayMenu(sf::RenderWindow& window){
 * Overloaded displayMenu to include music when calling acceptUserInput
 *************************************************************************/
 void gameOptions::displayMenu(sf::RenderWindow& window, sf::Music& music){
+	itemSelected = 0;
     displayMenu(window);
     acceptUserInput(window,music);
 }
@@ -114,21 +161,51 @@ void gameOptions::acceptUserInput(sf::RenderWindow& window, sf::Music& music){
 			}
 
 			if(event.type == sf::Event::KeyPressed){
-				if(event.key.code == sf::Keyboard::BackSpace){
-					window.clear();
-					return;
+				if(event.key.code == sf::Keyboard::Return){
+					switch (itemSelected) {
+
+					case 0: 
+						fullScreen(window);
+					break;
+
+					case 1:
+						notFullScreen(window);
+						break;
+
+					case 2:
+						window.clear();
+						return;
+						break;
+
+					
+					case 3:
+						if(music.getStatus()==sf::Music::Paused)
+                    	music.play();
+            		else
+            			stopMusic(music);
+						break;
+
+					default:
+					break;
+
+		
+			}
 				}
-				if(event.key.code == sf::Keyboard::M){
-                    if(music.getStatus()==sf::Music::Paused)
-                        music.play();
-                    else 
-					    stopMusic(music);
+				
+
+				
+				if(event.key.code == sf::Keyboard::Up){
+					itemSelected--;
+					displayMenu(window);
+			
+				}
+				if(event.key.code == sf::Keyboard::Down){
+					itemSelected++;
+					displayMenu(window);
+			
 				}
 
                 
-				if(event.key.code == sf::Keyboard::V){
-					fullScreen(window);
-				}
 			}
 
 		}
@@ -165,75 +242,8 @@ void gameOptions::highScore(){
 void gameOptions::exitToMenu(){
 }
 
-
-
-/***********************************************************************************************************************
-* This funtion change the game title and game text color
-* Add by Runquan Ye
-* My idea is this, the option panel will show the text to inform user that press key to change the text and title's colors
-* 	i.e.: press "F3" function key invold changeTextColor method
-*	      then press "1" for turning the text color to red, "2" for blue
-*		"1 - red, 2 - white, 3 - blue, 4 - green, 5 - purple"
-*		"6 - brown, 7 - gray, 8 - orange, 9 - yellow, 0 - pink"
-* Request, need the game object g pass in (Maybe)
-*	or just modify the window object's title and text feature.
-*	or just modify the text and title feature and then update the window, since option is a part inside of the game
-************************************************************************************************************************/
-void gameOptions::changeTextColor(sf::Text &text, sf::Text &title, sf::Event &event){
+void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){
 	/**This one I think we would have to ask to change his render funcion - Nate **/
-	switch(event.key.code){
-		std::cout << event.key.code;
-		case sf::Keyboard::Num1:
-			text.setFillColor(sf::Color::Red);
-			title.setFillColor(sf::Color::Red);
-		break;
-		
-		case sf::Keyboard::Num2:
-			text.setFillColor(sf::Color::White);
-			title.setFillColor(sf::Color::White);
-		break;
-
-		case sf::Keyboard::Num3:
-			text.setFillColor(sf::Color::Blue);
-			title.setFillColor(sf::Color::Blue);
-		break;
-
-		case sf::Keyboard::Num4:
-			text.setFillColor(sf::Color::Green);
-			title.setFillColor(sf::Color::Green);
-		break;
-
-		case sf::Keyboard::Num5:
-			text.setFillColor(sf::Color::Purple);
-			title.setFillColor(sf::Color::Purple);
-		break;
-	
-		case sf::Keyboard::Num6:
-			text.setFillColor(sf::Color::Brown);
-			title.setFillColor(sf::Color::Brown);
-		break;
-
-		case sf::Keyboard::Num7:
-			text.setFillColor(sf::Color::Gray);
-			title.setFillColor(sf::Color::Gray);
-		break;
-
-		case sf::Keyboard::Num8:
-			text.setFillColor(sf::Color::Orange);
-			title.setFillColor(sf::Color::Orange);
-		break;
-
-		case sf::Keyboard::Num9:
-			text.setFillColor(sf::Color::Yellow);
-			title.setFillColor(sf::Color::Yellow);
-		break;
-
-		case sf::Keyboard::Num0:
-			text.setFillColor(sf::Color::Pink);
-			title.setFillColor(sf::Color::Pink);
-		break;
-		
-	}
 }
 
 void gameOptions::fullScreen(sf::RenderWindow& window) 
@@ -244,6 +254,7 @@ void gameOptions::fullScreen(sf::RenderWindow& window)
     //window.create(sf::VideoMode(1300, 1400), "Not on my block.", 3 << 3);
 	const std::vector<sf::VideoMode>& fullscreenModes = sf::VideoMode::getFullscreenModes();
 	changeResolution(window,fullscreenModes[0].width,fullscreenModes[0].height);
+	window.clear();
     displayMenu(window);
 }
 
@@ -264,26 +275,91 @@ void gameOptions::endGame(bool& done){
 	done = true; //Should break the loop, see Game::run function
 }
 
-/**Change Difficulty**/
-void gameOptions::changeDifficulty(int diff, std::vector<Monster>& monsters, Person& player){
-	switch diff{
-		case 1:
-			//Easy
-			setPlayerHealth(player, 200);
-			break;
-		case 2:
-			//Medium
-			setPlayerHealth(player, 100);
-			//Will this work? or will the moster dissapear when the function ends?
-			monsters.push_back(monster().updatePosition(50, 50));
-			break;
-		case 3:
-			//Hard
-			setPlayerHealth(player, 50);
-			monsters.push_back(monster().updatePosition(50, 50));
-			monster.push_back(monster().updatePosition(25, 25));
-			break;
-		default:
-			break;
-	}
+//Colors the appropriate
+void gameOptions::colorLabel(sf::RenderWindow& window, sf::Text& text){
+	text.setFillColor(sf::Color::Yellow);
+	 window.draw(text);
+
 }
+
+void gameOptions::notFullScreen(sf::RenderWindow& window){
+
+	window.setSize(sf::Vector2<unsigned int>(WIDTH, HEIGHT + 100));
+	displayMenu(window);
+}
+
+/***********************************************************************************************************************
+* This funtion change the game title and game text color
+* Add by Runquan Ye
+* My idea is this, the option panel will show the text to inform user that press key to change the text and title's colors
+* 	i.e.: press "F3" function key invold changeTextColor method
+*	      then press "1" for turning the text color to red, "2" for blue
+*		"1 - red, 2 - white, 3 - blue, 4 - green, 5 - purple"
+*		"6 - brown, 7 - gray, 8 - orange, 9 - yellow, 0 - pink"
+* Request, need the game object g pass in (Maybe)
+*	or just modify the window object's title and text feature.
+*	or just modify the text and title feature and then update the window, since option is a part inside of the game
+************************************************************************************************************************/
+// void gameOptions::changeTextColor(sf::RenderWindow window){
+// 	/**This one I think we would have to ask to change his render funcion - Nate **/
+// 	switch(event.key.code){
+// 		std::cout << event.key.code;
+// 		case sf::Keyboard::Num1:
+			
+// 			color = sf::Color::White; 
+// 		break;
+		
+// 		case sf::Keyboard::Num2:
+// 			color = sf::Color::Red;
+// 		break;
+
+// 		case sf::Keyboard::Num3:
+// 			color = sf::Color::Green;
+// 		break;
+
+// 		case sf::Keyboard::Num4:
+// 			color = sf::Color::Blue;
+// 		break;
+
+// 		case sf::Keyboard::Num5:
+// 			color = sf::Color::Yellow;
+// 		break;
+	
+// 		case sf::Keyboard::Num6:
+// 			color = sf::Color::Magenta;
+// 		break;
+
+// 		case sf::Keyboard::Num7:
+// 			color = sf::Color::Cyan;
+// 		break;
+		
+// 	}
+// 	displayMenu(window);
+// }
+
+
+/**Change Difficulty**/
+// void gameOptions::changeDifficulty(int diff, std::vector<Monster>& monsters, Person& player){
+// 	switch (diff){
+// 		case 1:
+// 			//Easy
+// 			setPlayerHealth(player, 200);
+// 			break;
+// 		case 2:
+// 			//Medium
+// 			setPlayerHealth(player, 100);
+// 			//Will this work? or will the moster dissapear when the function ends?
+// 			monsters.push_back(monster().updatePosition(50, 50));
+// 			break;
+// 		case 3:
+// 			//Hard
+// 			setPlayerHealth(player, 50);
+// 			monsters.push_back(monster().updatePosition(50, 50));
+// 			monster.push_back(monster().updatePosition(25, 25));
+// 			break;
+// 		default:
+// 			break;
+// 	}
+// }
+
+

@@ -9,6 +9,8 @@
 /**Added by Nate **/
 #include <vector>
 
+#define menuSize 4
+
 
 
 class gameOptions{
@@ -48,12 +50,24 @@ class gameOptions{
 		void setPlayerHealth(Person&, int);
 		void resetPlayer(Person&);
 		void endGame(bool&);
-	        void gameOptions::changeDifficulty(int, std::vector<Monster>&, Person&);
+		//Colors appropriate menu item
+		void colorLabel(sf::RenderWindow&, sf::Text&);
+
+		void notFullScreen(sf::RenderWindow&);
+
+		void changeTextColor(sf::RenderWindow window);
+
+		void changeDifficulty(int, std::vector<Monster>&, Person&);
 		
 
 	private:
 
 	sf::Font font;
+
+	sf::Color color;
+	
+	int itemSelected;
+
 	//sf::Music music;
 
 
