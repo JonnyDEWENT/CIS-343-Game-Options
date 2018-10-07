@@ -197,3 +197,26 @@ void gameOptions::endGame(bool& done){
 	done = true; //Should break the loop, see Game::run function
 }
 
+/**Change Difficulty**/
+void gameOptions::changeDifficulty(int diff, std::vector<Monster>& monsters, Person& player){
+	switch diff{
+		case 1:
+			//Easy
+			setPlayerHealth(player, 200);
+			break;
+		case 2:
+			//Medium
+			setPlayerHealth(player, 100);
+			//Will this work? or will the moster dissapear when the function ends?
+			monsters.push_back(monster().updatePosition(50, 50));
+			break;
+		case 3:
+			//Hard
+			setPlayerHealth(player, 50);
+			monsters.push_back(monster().updatePosition(50, 50));
+			monster.push_back(monster().updatePosition(25, 25));
+			break;
+		default:
+			break;
+	}
+}
