@@ -22,6 +22,7 @@ class Game {
 		Person player;
 		bool done;
 		int score;
+		int highScore;
 		gameOptions optionsMenu;
 		sf::Text scoreLabel;
 		sf::Text playerHealth;	

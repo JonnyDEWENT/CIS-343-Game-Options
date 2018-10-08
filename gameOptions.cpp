@@ -155,14 +155,22 @@ void gameOptions::reset(std::vector<Monster>& monsters, Person& player, bool& do
 	done = false; //Maybe this isnt neccecary
 }
 
-void gameOptions::highScore(){
-	
+/**
+ * This method gathers the top scores of the previous played games
+ */
+void gameOptions::highScore(int score){
+	int prevHighScore;
+	if (score > this->highScore) {
+		prevHighScore = highScore;
+		this->highScore = score;
+	}
 }
 
 /*************************************************************************
 * Should effectively quit the game and return to the main screen
 *************************************************************************/
-void gameOptions::exitToMenu(){
+void gameOptions::exitToMenu(sf::RenderWindow& window){
+
 }
 
 void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){
