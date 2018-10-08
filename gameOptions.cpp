@@ -22,6 +22,14 @@ gameOptions::gameOptions() {
 
 
 }
+
+/**
+* Default destructor
+*/
+gameOptions::~gameOptions() {
+
+}
+
 /*************************************************************************
 * Constructor ()
 *************************************************************************/
@@ -167,8 +175,10 @@ void gameOptions::highScore(){
 /*************************************************************************
 * Should effectively quit the game and return to the main screen
 *************************************************************************/
-void gameOptions::exitToMenu(sf::RenderWindow& window){
-
+void gameOptions::exitToMenu(){
+	Game g;
+	g.start();
+	g.run();
 }
 
 void gameOptions::changeTextColor(/**sf::RenderWindow& window, sf::Color color **/){

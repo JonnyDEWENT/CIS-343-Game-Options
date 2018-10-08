@@ -13,6 +13,8 @@ class gameOptions{
 
 		gameOptions();
 
+		~gameOptions();
+
 		gameOptions(sf::RenderWindow&, sf::Music&);
 
 		void stopMusic(sf::Music&);
