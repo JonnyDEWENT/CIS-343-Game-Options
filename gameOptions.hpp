@@ -55,7 +55,7 @@ class gameOptions{
 
 	sf::Font font;
 	//sf::Music music;
-	sf::Font highScore;
+	//sf::Font highScore;
 
 
 };

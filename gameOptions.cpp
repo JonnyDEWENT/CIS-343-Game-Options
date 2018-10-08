@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include <iostream>
 #include "Settings.hpp"
+#include "HighScores.hpp"
 
 /**Added by Nate **/
 #include "Person.hpp"
@@ -158,12 +159,9 @@ void gameOptions::reset(std::vector<Monster>& monsters, Person& player, bool& do
 /**
  * This method gathers the top scores of the previous played games
  */
-void gameOptions::highScore(int score){
-	int prevHighScore;
-	if (score > this->highScore) {
-		prevHighScore = highScore;
-		this->highScore = score;
-	}
+void gameOptions::highScore(){
+	HighScores highScores = new HighScores();
+	highScores.launchHighScoresScreen();
 }
 
 /*************************************************************************
